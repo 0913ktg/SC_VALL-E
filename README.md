@@ -57,6 +57,27 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 This project is licensed under the MIT License - see the [LICENSE.md](https://gist.github.com/PurpleBooth/LICENSE.md) file for details / 이 프로젝트는 MIT 라이센스로 라이센스가 부여되어 있습니다. 자세한 내용은 LICENSE.md 파일을 참고하세요.
 
+
+## Citation
+
+```
+@article{wang2023neural,
+  title={Neural Codec Language Models are Zero-Shot Text to Speech Synthesizers},
+  author={Wang, Chengyi and Chen, Sanyuan and Wu, Yu and Zhang, Ziqiang and Zhou, Long and Liu, Shujie and Chen, Zhuo and Liu, Yanqing and Wang, Huaming and Li, Jinyu and others},
+  journal={arXiv preprint arXiv:2301.02111},
+  year={2023}
+}
+```
+```
+@article{defossez2022highfi,
+  title={High Fidelity Neural Audio Compression},
+  author={Défossez, Alexandre and Copet, Jade and Synnaeve, Gabriel and Adi, Yossi},
+  journal={arXiv preprint arXiv:2210.13438},
+  year={2022}
+}
+```
+
+
 ## Acknowledgments
 
 * Hat tip to anyone whose code was used / 코드를 사용한 모든 사용자들에게 팁
