@@ -1,0 +1,8 @@
+data_dirs: [data]
+
+model: ar
+batch_size: 20
+eval_batch_size: 20
+eval_every: 10000
+
+sampling_temperature: 0.2

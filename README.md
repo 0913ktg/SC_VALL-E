@@ -1,66 +1,90 @@
+<p align="center">
+<img src="./SC_VALL-E.png" width="500px"></img>
+</p>
+
 # SC_VALL-E: Style-Controllable Zero-Shot Text to Speech Synthesizer based on VALL-E
 
-**[뱃지나 프로젝트에 관한 이미지들이 이 위치에 들어가면 좋습니다]**  
-One Paragraph of project description goes here / 프로젝트의 전반적인 내용에 대한 요약을 여기에 적습니다
+This project was implemented using the unofficial PyTorch [implementation](https://github.com/enhuiz/vall-e) by "enhuize".
 
 ## Getting Started
 
-이 곳에서 설치에 관련된 이야기를 해주시면 좋습니다.
+Setting up the development environment for this project can be challenging due to version conflicts with various libraries. 
 
-### Prerequisites
+Therefore, we managed the development environment of this project using a Docker container. 
 
-아래 사항들이 설치가 되어있어야합니다.
+The Docker image, which can be used to create the Docker container, can be downloaded from [Docker Hub](https://hub.docker.com/r/0913ktg/vall-e/tags).
 
-```
-예시
-```
+### Dataset
+
+The data used for model training can be downloaded from the following link.
+
+- 명령어 음성(일반남여) : https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=96
+- 명령어 음성(소아,유아) : https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=95
+- 명령어 음성(노인남여) : https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=94
+- 자유대화 음성(일반남여) : https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=107
+- 자유대화 음성(소아,유아) : https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=109
+- 자유대화 음성(노인남여) : https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=108
+- 감성 및 발화 스타일별 음성합성 데이터 : https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=466
+- 한국인 외래어 발음 : https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=131
+- 한국어 음성 : https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=123
 
 ### Installing
 
-아래 사항들로 현 프로젝트에 관한 모듈들을 설치할 수 있습니다.
+You can clone this GitHub repository and use it.
 
 ```
-예시
-```
-## Running the tests
-
-어떻게 테스트가 이 시스템에서 돌아가는지에 대한 설명을 합니다
-
-### 테스트는 이런 식으로 동작합니다
-
-왜 이렇게 동작하는지, 설명합니다
-
-```
-예시
+git clone https://github.com/0913ktg/SC_VALL-E
 ```
 
-### 테스트는 이런 식으로 작성하시면 됩니다
+### Train
+
+1. Put your data into a folder, e.g. `data/your_data`. Audio files should be named with the suffix `.wav` and text files with `.normalized.txt`.
+
+2. Quantize the data:
 
 ```
-예시
+python -m vall_e.emb.qnt data/your_data
 ```
 
-## Deployment
+3. Generate phonemes based on the text:
 
-Add additional notes about how to deploy this on a live system / 라이브 시스템을 배포하는 방법
+```
+python -m vall_e.emb.g2p data/your_data
+```
 
-## Built With
+4. Customize your configuration by creating `config/your_data/ar.yml` and `config/your_data/nar.yml`. Refer to the example configs in `config/korean` and `vall_e/config.py` for details. You may choose different model presets, check `vall_e/vall_e/__init__.py`.
 
-* [이름](링크) - 무엇 무엇을 했어요
-* [Name](Link) - Create README.md
+5. Train the AR or NAR model using the following scripts:
 
-## Contributiong
+```
+python -m vall_e.train yaml=config/your_data/ar_or_nar.yml
+```
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us. / [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) 를 읽고 이에 맞추어 pull request 를 해주세요.
+You may quit your training any time by just typing `quit` in your CLI. The latest checkpoint will be automatically saved.
 
-## License
+### Export
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://gist.github.com/PurpleBooth/LICENSE.md) file for details / 이 프로젝트는 MIT 라이센스로 라이센스가 부여되어 있습니다. 자세한 내용은 LICENSE.md 파일을 참고하세요.
+Both trained models need to be exported to a certain path. To export either of them, run:
 
+```
+python -m vall_e.export zoo/ar_or_nar.pt yaml=config/your_data/ar_or_nar.yml
+```
+
+This will export the latest checkpoint.
+
+### Synthesis
+
+```
+python -m vall_e <text> <ref_path> <out_path> --ar-ckpt zoo/ar.pt --nar-ckpt zoo/nar.pt
+```
+
+## Notice
+
+- [EnCodec](https://github.com/facebookresearch/encodec) is licensed under CC-BY-NC 4.0. If you use the code to generate audio quantization or perform decoding, it is important to adhere to the terms of their license.
 
 ## Citation
 
-```
+```bibtex
 @article{wang2023neural,
   title={Neural Codec Language Models are Zero-Shot Text to Speech Synthesizers},
   author={Wang, Chengyi and Chen, Sanyuan and Wu, Yu and Zhang, Ziqiang and Zhou, Long and Liu, Shujie and Chen, Zhuo and Liu, Yanqing and Wang, Huaming and Li, Jinyu and others},
@@ -68,7 +92,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](https://gi
   year={2023}
 }
 ```
-```
+
+```bibtex
 @article{defossez2022highfi,
   title={High Fidelity Neural Audio Compression},
   author={Défossez, Alexandre and Copet, Jade and Synnaeve, Gabriel and Adi, Yossi},
@@ -80,6 +105,14 @@ This project is licensed under the MIT License - see the [LICENSE.md](https://gi
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used / 코드를 사용한 모든 사용자들에게 팁
-* Inspiration / 영감
-* etc / 기타
+* Hat tip to anyone whose code was used
+
+There were many difficulties in processing the data downloaded from AI Hub for training. If you have preprocessed data available, it is recommended to use it as much as possible. However, if you plan to process data downloaded from the internet, be aware that data preprocessing can be time-consuming. 
+
+Having a significant difference in the length of utterances in the training data can lead to inefficient training. It is recommended to use audio files with utterance lengths between 3 to 7 seconds.
+
+* Inspiration
+
+I would like to express my gratitude to [enhuiz](https://github.com/enhuiz) for providing well-implemented PyTorch source code. 
+
+I also extend my thanks to [Moon-sung-woo](https://github.com/Moon-sung-woo) for providing valuable assistance in getting started with Expressive TTS.
