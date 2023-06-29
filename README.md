@@ -1,10 +1,10 @@
 <p align="center">
-<img src="./SC_VALL-E.png" width="500px"></img>
+<img src="./SC_VALL-E.png" width="800px"></img>
 </p>
 
 # SC_VALL-E: Style-Controllable Zero-Shot Text to Speech Synthesizer based on VALL-E
 
-This project was implemented using the unofficial PyTorch [implementation](https://github.com/enhuiz/vall-e) by "enhuize".
+This project was implemented using the unofficial PyTorch [implementation](https://github.com/enhuiz/vall-e) by "enhuiz".
 
 ## Getting Started
 
