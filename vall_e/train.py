@@ -36,22 +36,26 @@ def main():
     setup_logging(cfg.log_dir)
     
     print('make datasets start')
-    if os.path.isfile('/data/vall-e/vall_e/dataloaders/train_dl.pkl'):  
-        with open('/data/vall-e/vall_e/dataloaders/train_dl.pkl', 'rb') as f:
+    if os.path.isfile('./vall_e/dataloaders/train_dl.pkl'):  
+        with open('./vall_e/dataloaders/train_dl.pkl', 'rb') as f:
             train_dl = pickle.load(f)
-        with open('/data/vall-e/vall_e/dataloaders/subtrain_dl.pkl', 'rb') as f:
+        with open('./vall_e/dataloaders/subtrain_dl.pkl', 'rb') as f:
             subtrain_dl = pickle.load(f)
-        with open('/data/vall-e/vall_e/dataloaders/val_dl.pkl', 'rb') as f:
+        with open('./vall_e/dataloaders/val_dl.pkl', 'rb') as f:
             val_dl = pickle.load(f)
     else:    
         train_dl, subtrain_dl, val_dl = create_train_val_dataloader()
-        with open('/data/vall-e/vall_e/dataloaders/train_dl.pkl', 'wb') as f:
+        
+        if not os.path.exists('./vall_e/dataloaders'):
+            os.makedirs('./vall_e/dataloaders')
+        
+        with open('./vall_e/dataloaders/train_dl.pkl', 'wb') as f:
             pickle.dump(train_dl, f)
         print('train loader saved')
-        with open('/data/vall-e/vall_e/dataloaders/subtrain_dl.pkl', 'wb') as f:
+        with open('./vall_e/dataloaders/subtrain_dl.pkl', 'wb') as f:
             pickle.dump(subtrain_dl, f)
         print('subtrain loader saved')
-        with open('/data/vall-e/vall_e/dataloaders/val_dl.pkl', 'wb') as f:
+        with open('./vall_e/dataloaders/val_dl.pkl', 'wb') as f:
             pickle.dump(val_dl, f)
         print('validation loader saved')
         
