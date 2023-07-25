@@ -93,6 +93,15 @@ python -m vall_e <text> <ref_path> <out_path> --ar-ckpt zoo/ar.pt --nar-ckpt zoo
 }
 ```
 
+```bibtex
+@article{defossez2022highfi,
+  title={High Fidelity Neural Audio Compression},
+  author={Défossez, Alexandre and Copet, Jade and Synnaeve, Gabriel and Adi, Yossi},
+  journal={arXiv preprint arXiv:2210.13438},
+  year={2022}
+}
+```
+
 ## Acknowledgments
 
 * Hat tip to anyone whose code was used
