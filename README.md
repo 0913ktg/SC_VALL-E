@@ -85,7 +85,7 @@ python -m vall_e <text> <ref_path> <out_path> --ar-ckpt zoo/ar.pt --nar-ckpt zoo
 ## Citation
 
 ```bibtex
-@article{kim2023scvall,
+@article{kim2023sc,
   title={SC VALL-E: Style-Controllable Zero-Shot Text to Speech Synthesizer},
   author={Kim, Daegyeom and Hong, Seongho and Choi, Yong-Hoon},
   journal={arXiv preprint arXiv:2307.10550},
