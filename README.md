@@ -85,23 +85,13 @@ python -m vall_e <text> <ref_path> <out_path> --ar-ckpt zoo/ar.pt --nar-ckpt zoo
 ## Citation
 
 ```bibtex
-@article{wang2023neural,
-  title={Neural Codec Language Models are Zero-Shot Text to Speech Synthesizers},
-  author={Wang, Chengyi and Chen, Sanyuan and Wu, Yu and Zhang, Ziqiang and Zhou, Long and Liu, Shujie and Chen, Zhuo and Liu, Yanqing and Wang, Huaming and Li, Jinyu and others},
-  journal={arXiv preprint arXiv:2301.02111},
+@article{kim2023scvall,
+  title={SC VALL-E: Style-Controllable Zero-Shot Text to Speech Synthesizer},
+  author={Kim, Daegyeom and Hong, Seongho and Choi, Yong-Hoon},
+  journal={arXiv preprint arXiv:2307.10550},
   year={2023}
 }
 ```
-
-```bibtex
-@article{defossez2022highfi,
-  title={High Fidelity Neural Audio Compression},
-  author={Défossez, Alexandre and Copet, Jade and Synnaeve, Gabriel and Adi, Yossi},
-  journal={arXiv preprint arXiv:2210.13438},
-  year={2022}
-}
-```
-
 
 ## Acknowledgments
 
