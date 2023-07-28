@@ -8,6 +8,8 @@ This project was implemented using the unofficial PyTorch [implementation](https
 
 You can check the audio demo of SC VALL-E at the following [link](https://0913ktg.github.io/).
 
+You can read the paper on SC VALL-E at the following [link](https://arxiv.org/abs/2307.10550).
+
 ## Getting Started
 
 Setting up the development environment for this project can be challenging due to version conflicts with various libraries. 
