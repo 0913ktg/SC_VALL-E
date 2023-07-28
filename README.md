@@ -6,6 +6,8 @@
 
 This project was implemented using the unofficial PyTorch [implementation](https://github.com/enhuiz/vall-e) by "enhuiz".
 
+You can check the audio demo of SC VALL-E at the following [link](https://0913ktg.github.io/).
+
 ## Getting Started
 
 Setting up the development environment for this project can be challenging due to version conflicts with various libraries. 
